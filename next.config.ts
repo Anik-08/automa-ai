@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const config = {
-  // output: 'export',
-  // distDir: 'dist',
-}
+  // Leave output unset to allow full dynamic features
+  experimental: {
+    serverActions: true,
+  },
+};
 
-export default config
+export default config;
