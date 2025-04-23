@@ -1,4 +1,12 @@
+'use client';
 import { ThemeToggle } from './components/ThemeToggle'
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 
 const features = [
   {
@@ -31,11 +39,22 @@ const features = [
 export default function Home() {
   return (
     <main className="min-h-screen px-4 py-8 md:px-6 lg:px-8">
-      <nav className="flex items-center justify-between mb-16 animate-fadeIn">
-        <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-400">Automa-AI</h1>
-        <ThemeToggle />
-      </nav>
+     <nav className="flex items-center justify-between mb-16 animate-fadeIn gap-4">
+  <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-400">Automa-AI</h1>
+  
+  <div className="flex items-center gap-4 dark:text-purple-400 text-gray-900">
+    <SignedOut>
+      <SignInButton />
+      <SignUpButton />
+    </SignedOut>
+    
+    <SignedIn>
+      <UserButton />
+    </SignedIn>
 
+    <ThemeToggle />
+  </div>
+</nav>
       <section className="max-w-4xl mx-auto text-center mb-16 animate-fadeInUp">
         <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent animate-gradient">
           Automate Your Workflow with AI
