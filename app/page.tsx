@@ -1,60 +1,62 @@
-'use client';
-import { ThemeToggle } from './components/ThemeToggle'
+'use client'; // This directive ensures that the component is rendered on the client side
+
+import { ThemeToggle } from './components/ThemeToggle';
+import { useUser } from '@clerk/nextjs';
 import {
   SignInButton,
   SignUpButton,
-  SignedIn,
-  SignedOut,
   UserButton,
-} from '@clerk/nextjs'
+} from '@clerk/nextjs';
 
 const features = [
   {
     title: 'Gmail Composer',
     description: 'Automatically compose professional emails with AI assistance',
-    icon: '📧'
+    icon: '📧',
   },
   {
     title: 'PDF Summarizer',
     description: 'Extract key insights from your documents instantly',
-    icon: '📄'
+    icon: '📄',
   },
   {
     title: 'Meeting Summarizer',
     description: 'Get concise summaries of your meetings automatically',
-    icon: '🎥'
+    icon: '🎥',
   },
   {
     title: 'Resume Builder',
     description: 'Create professional resumes with AI-powered suggestions',
-    icon: '📝'
+    icon: '📝',
   },
   {
     title: 'More Coming Soon',
     description: "We're constantly adding new AI-powered tools",
-    icon: '⚡'
-  }
-]
+    icon: '⚡',
+  },
+];
 
 export default function Home() {
+  const { isSignedIn, user } = useUser(); 
+
   return (
     <main className="min-h-screen px-4 py-8 md:px-6 lg:px-8">
-     <nav className="flex items-center justify-between mb-16 animate-fadeIn gap-4">
-  <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-400">Automa-AI</h1>
-  
-  <div className="flex items-center gap-4 dark:text-purple-400 text-gray-900">
-    <SignedOut>
-      <SignInButton />
-      <SignUpButton />
-    </SignedOut>
-    
-    <SignedIn>
-      <UserButton />
-    </SignedIn>
+      <nav className="flex items-center justify-between mb-16 animate-fadeIn gap-4">
+        <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-400">Automa-AI</h1>
 
-    <ThemeToggle />
-  </div>
-</nav>
+        <div className="flex items-center gap-4 dark:text-purple-400 text-gray-900">
+          {!isSignedIn ? (
+            <>
+              <SignInButton />
+              <SignUpButton />
+            </>
+          ) : (
+            <UserButton />
+          )}
+          <ThemeToggle />
+        </div>
+      </nav>
+
       <section className="max-w-4xl mx-auto text-center mb-16 animate-fadeInUp">
         <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-purple-400 bg-clip-text text-transparent animate-gradient">
           Automate Your Workflow with AI
@@ -92,5 +94,5 @@ export default function Home() {
         </button>
       </section>
     </main>
-  )
+  );
 }
