@@ -37,7 +37,7 @@ const features = [
 ];
 
 export default function Home() {
-  const { isSignedIn, user } = useUser(); 
+  const { isSignedIn } = useUser(); 
 
   return (
     <main className="min-h-screen px-4 py-8 md:px-6 lg:px-8">
