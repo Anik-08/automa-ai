@@ -1,8 +1,14 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+}
+
+:root {
+  --gradient-color-1: #3b82f6;
+  --gradient-color-2: #6366f1;
+  --gradient-color-3: #8b5cf6;
+  --gradient-color-4: #a855f7;
 }
 
 .logo {
@@ -25,6 +31,106 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-heading {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(
+    -45deg,
+    var(--gradient-color-1),
+    var(--gradient-color-2),
+    var(--gradient-color-3),
+    var(--gradient-color-4)
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: gradient 5s ease infinite;
+  width: 100%;
+}
+
+.gradient-text {
+  background-image: linear-gradient(
+    -45deg,
+    #3b82f6 0%,
+    #6366f1 25%,
+    #8b5cf6 50%,
+    #a855f7 75%,
+    #3b82f6 100%
+  );
+  background-size: 400%;
+  -webkit-background-clip: text !important;
+  -moz-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: gradient 6s ease infinite;
+  display: inline-block;
+}
+
+.feature-card-hover {
+  transition: all 0.3s ease;
+}
+
+.feature-card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.hero-content-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.floating-animation {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.scale-on-hover {
+  transition: transform 0.3s ease;
+}
+
+.scale-on-hover:hover {
+  transform: scale(1.05);
 }
 
 @media (prefers-reduced-motion: no-preference) {
