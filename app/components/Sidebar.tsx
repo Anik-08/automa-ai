@@ -15,7 +15,7 @@ export function Sidebar({ selectedWorkflow, setSelectedWorkflow }: SidebarProps)
   return (
     <nav className="w-full text-white flex flex-col">
       <div className="flex items-center justify-center mb-8">
-        <h2 className="text-2xl font-semibold text-purple-400">Automa-AI</h2>
+        <h2 className="text-2xl font-semibold text-purple-400">Workflows</h2>
       </div>
       <ul>
         {workflows.map((workflow) => (

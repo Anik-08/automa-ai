@@ -70,11 +70,11 @@ export default function DashboardPage() {
 
         {/* Main Content Area */}
         <div
-  className="bg-gray-500 p-6 rounded-lg shadow-lg overflow-auto"
-  style={{ height: 'calc(100vh - 8rem)' }}
->
-  {renderWorkflow()}
-</div>
+        className="bg-gray-500 p-6 rounded-lg shadow-lg overflow-auto"
+        style={{ height: 'calc(100vh - 8rem)' }}
+        >
+        {renderWorkflow()}
+        </div>
       </div>
     </main>
   );
