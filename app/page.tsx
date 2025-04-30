@@ -1,12 +1,14 @@
-'use client'; // This directive ensures that the component is rendered on the client side
+'use client';
 
 import { ThemeToggle } from './components/ThemeToggle';
 import { useUser } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 import {
   SignInButton,
   SignUpButton,
   UserButton,
 } from '@clerk/nextjs';
+import { useEffect,useRef } from 'react';
 
 const features = [
   {
@@ -38,12 +40,30 @@ const features = [
 
 export default function Home() {
   const { isSignedIn } = useUser(); 
+  const router = useRouter();
+  const signInButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (isSignedIn) {
+      router.push('/dashboard');
+    }
+  }, [isSignedIn, router]);
+
+  const handleGetStarted = () => {
+    if (isSignedIn) {
+      router.push('/dashboard');
+    }else{
+      signInButtonRef.current?.click();
+    }
+  };
 
   return (
     <main className="min-h-screen px-4 py-8 md:px-6 lg:px-8">
       <nav className="flex items-center justify-between mb-16 animate-fadeIn gap-4">
         <h1 className="text-2xl font-bold text-purple-600 dark:text-purple-400">Automa-AI</h1>
-
+        <SignUpButton mode="modal">
+        <button ref={signInButtonRef} />
+        </SignUpButton>
         <div className="flex items-center gap-4 dark:text-purple-400 text-gray-900">
           {!isSignedIn ? (
             <>
@@ -65,7 +85,7 @@ export default function Home() {
           Streamline your daily tasks with our suite of AI-powered tools. From email composition
           to document summarization.
         </p>
-        <button className="bg-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+        <button onClick={handleGetStarted} className="bg-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg">
           Get Started
         </button>
       </section>
@@ -89,7 +109,10 @@ export default function Home() {
         <p className="text-gray-700 dark:text-gray-300 mb-8">
           Join thousands of users who are already saving time with Automa-AI
         </p>
-        <button className="bg-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+        <button
+          onClick={handleGetStarted}
+          className="bg-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+        >
           Try for Free
         </button>
       </section>
